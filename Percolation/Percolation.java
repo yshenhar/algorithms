@@ -13,8 +13,8 @@ import java.lang.IndexOutOfBoundsException;
 
 public class Percolation {
 
-	public int N; // Length of one side of the grid.
-	public boolean[] open;
+	private int N; // Length of one side of the grid.
+	private boolean[] open;
 	private WeightedQuickUnionUF paths;
 
 	// create N-by-N grid, with all sites blocked
