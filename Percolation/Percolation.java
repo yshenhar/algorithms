@@ -35,12 +35,25 @@ public class Percolation {
 			this.paths.union(this.virtual_bottom, indexOf(N, col));
 	}
 
+	// is site (row i, column j) open?
+	public boolean isOpen(int i, int j) {
+		return open[indexOf(i, j)];
+	}
+
+	// is site (row i, column j) full?
+	public boolean isFull(int i, int j) {
+		return !open[indexOf(i, j)];
+	}
+
+	// does the system percolate?
+	public boolean percolates() {
+		return paths.connected(virtual_top, virtual_bottom);
+	}
+
+
 	/* The rest of the API:
 
 	public void open(int i, int j)		// open site (row i, column j) if it is not already
-	public boolean isOpen(int i, int j)	// is site (row i, column j) open?
-	public boolean isFull(int i, int j)	// is site (row i, column j) full?
-	public boolean percolates()			// does the system percolate?
 	*/
 
 	/* Convert grid coordinates of the form (x, y) where x,y in {1,...,N}
