@@ -16,21 +16,23 @@ public class Percolation {
 	private int N; // Length of one side of the grid.
 	private boolean[] open;
 	private WeightedQuickUnionUF paths;
+	private int virtual_top;
+	private int virtual_bottom;
 
 	// create N-by-N grid, with all sites blocked
 	public Percolation(int N) {
 		this.N = N;
 		this.open = new boolean[N^2];
 		/*	Include two extra spots in the connections list two hold the virtual
-			top and virtual bottom spots. Virtual top is 1 to the left of
-			the grid's top left spot; virtual bottom is 1 to the right of the
-			bottom right spot.
+			top and virtual bottom spots.
 		*/
 		this.paths = new WeightedQuickUnionUF(N^2 + 2);
+		this.virtual_top = indexOf(N, N) + 1;
+		this.virtual_bottom = indexOf(N, N) + 2;
 		for (int col = 1; col <= N; col++)
-			this.paths.union(indexOf(1, 1) - 1, indexOf(1, col));
+			this.paths.union(this.virtual_top, indexOf(1, col));
 		for (int col = 1; col <= N; col++)
-			this.paths.union(indexOf(N, N) + 1, indexOf(N, col));
+			this.paths.union(this.virtual_bottom, indexOf(N, col));
 	}
 
 	/* The rest of the API:
