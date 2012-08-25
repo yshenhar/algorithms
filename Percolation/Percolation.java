@@ -29,10 +29,6 @@ public class Percolation {
 		paths = new WeightedQuickUnionUF(N^2 + 2);
 		virtual_top = indexOf(N, N) + 1;
 		virtual_bottom = indexOf(N, N) + 2;
-		for (int col = 1; col <= N; col++)
-			paths.union(virtual_top, indexOf(1, col));
-		for (int col = 1; col <= N; col++)
-			paths.union(virtual_bottom, indexOf(N, col));
 	}
 
 	// is site (row i, column j) open?
@@ -50,11 +46,26 @@ public class Percolation {
 		return paths.connected(virtual_top, virtual_bottom);
 	}
 
+	// open site (row i, column j) if it is not already
+	public void open(int i, int j) {
+		if (isOpen(i, j))
+			return;
+		int index = indexOf(i, j);
 
-	/* The rest of the API:
-
-	public void open(int i, int j)		// open site (row i, column j) if it is not already
-	*/
+		open[index] = true;
+		if (i == 1)
+			paths.union(virtual_top, index);
+		if (i == N)
+			paths.union(virtual_bottom, index);
+		if (i < N  && isOpen(i + 1, j))
+			paths.union(indexOf(i + 1, j), index);
+		if (i > 1 && isOpen(i - 1, j))
+			paths.union(indexOf(i - 1, j), index);
+		if (j < N && isOpen(i, j + 1))
+			paths.union(indexOf(i, j + 1), index);
+		if (j > 1 && isOpen(i, j - 1))
+			paths.union(indexOf(i, j - 1), index);
+	}
 
 	/* Convert grid coordinates of the form (x, y) where x,y in {1,...,N}
 	to an array index. E.g., indexOf(1,1) == 0; indexOf(N, N) = N^2 - 1.
