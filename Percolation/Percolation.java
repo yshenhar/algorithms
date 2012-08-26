@@ -41,7 +41,7 @@ public class Percolation {
 
 	// is site (row i, column j) full?
 	public boolean isFull(int i, int j) {
-		return !open[indexOf(i, j)];
+		return paths.connected(virtual_top, indexOf(i, j));
 	}
 
 	// does the system percolate?
