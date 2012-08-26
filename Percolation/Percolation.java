@@ -90,29 +90,41 @@ public class Percolation {
 		return (row - 1) * N + (col - 1);
 	}
 
-	private static boolean test(int N, int[][] open_sites) {
-		int row, col;
+	private static boolean test(int N, int[][] open_sites, boolean expectation) {
+		boolean result;
 		Percolation tested = new Percolation(N);
-		for (int i = 0; i < open_sites.length; i++) {
-			row = open_sites[i][0];
-			col = open_sites[i][1];
-			tested.open(row, col);
+		for (int[] open_site: open_sites)
+			tested.open(open_site[0], open_site[1]);
+		result = tested.percolates();
+		if (!result && expectation) {
+			System.err.println("Unexpected failure");
+			return false;
 		}
-		return tested.percolates();
+		else if (result && !expectation) {
+			System.err.println("Unexpected success");
+			return false;
+		}
+		return true;
 	}
 
 	public static void main(String[] argv) {
+		int passes = 0;
+		int total = 0;
 		int[][] works = {{1, 1},		 {1, 3},
 						 {2, 1}, {2, 2},		 {2, 4},
 						 		 {3, 2}, {3, 3},
 						 {4, 1}, 		 {4, 3},};
-		if (!test(4, works))
-			System.err.println("Unexpected failure");
+		total++;
+		if (test(4, works, true))
+			passes++;
+
 		int[][] bad = {{1, 1},		 {1, 3},
 						{2, 1}, {2, 2},			{2, 4},
 								{3, 2},
 						{4, 1}, 		 {4, 3},};
-		if (test(4, bad))
-			System.err.println("Unexpected success");
+		total++;
+		if (test(4, bad, false))
+			passes++;
+		System.err.println("Tests: " + passes + "/" + total);
 	}
 }
