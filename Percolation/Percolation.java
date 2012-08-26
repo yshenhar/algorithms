@@ -8,19 +8,16 @@
  * Data type to model physical percolation (say of water through concrete).
  ******************************************************************************/
 
-import java.lang.IllegalArgumentException;
-
-
 public class Percolation {
 
 	private final int N; // Length of one side of the grid.
 	private boolean[] open;
 	private WeightedQuickUnionUF paths;
-	private final int virtual_top;
-	private final int virtual_bottom;
+	private final int virtualTop;
+	private final int virtualBottom;
 
 	// create N-by-N grid, with all sites blocked
-	public Percolation(int N) throws IllegalArgumentException {
+	public Percolation(int N) {
 		// The union-find data type we're using indexes its arrays with an int,
 		// so our N^2 sized grid must have N^2 <= 2^32 - 1 <=> N > 2^16.
 		// N^2 <= 2^32 - 3 <-> N^2 < 2^32 - 2 -> N < 0xffff
@@ -30,8 +27,8 @@ public class Percolation {
 		open = new boolean[N*N];
 		// Add two for the virtual top and bottom
 		paths = new WeightedQuickUnionUF(N*N + 2);
-		virtual_top = indexOf(N, N) + 1;
-		virtual_bottom = indexOf(N, N) + 2;
+		virtualTop = indexOf(N, N) + 1;
+		virtualBottom = indexOf(N, N) + 2;
 	}
 
 	// is site (row i, column j) open?
@@ -41,12 +38,12 @@ public class Percolation {
 
 	// is site (row i, column j) full?
 	public boolean isFull(int i, int j) {
-		return paths.connected(virtual_top, indexOf(i, j));
+		return paths.connected(virtualTop, indexOf(i, j));
 	}
 
 	// does the system percolate?
 	public boolean percolates() {
-		return paths.connected(virtual_top, virtual_bottom);
+		return paths.connected(virtualTop, virtualBottom);
 	}
 
 	// open site (row i, column j) if it is not already
@@ -57,10 +54,10 @@ public class Percolation {
 
 		open[index] = true;
 		if (i == 1) {
-			paths.union(virtual_top, index);
+			paths.union(virtualTop, index);
 		}
 		else if (i == N) {
-			paths.union(virtual_bottom, index);
+			paths.union(virtualBottom, index);
 		}
 
 		if (i < N  && isOpen(i + 1, j)) {
@@ -83,19 +80,19 @@ public class Percolation {
 
 	Assume the grid is in row-major form.
 	*/
-	private int indexOf(int row, int col) throws IndexOutOfBoundsException {
+	private int indexOf(int row, int col) {
 		if (row <= 0 || row > N || col <= 0 || col > N)
 			throw new IndexOutOfBoundsException(
-					"(" + row + ", " + col + ") out of bounds " +
-					"for " + N + "^2 grid.");
+					"(" + row + ", " + col + ") out of bounds "
+					+ "for " + N + "^2 grid.");
 		return (row - 1) * N + (col - 1);
 	}
 
-	private static boolean test_percolates(int N, int[][] open_sites, boolean expectation) {
+	private static boolean testPercolates(int N, int[][] openSites, boolean expectation) {
 		boolean result;
 		Percolation tested = new Percolation(N);
-		for (int[] open_site: open_sites)
-			tested.open(open_site[0], open_site[1]);
+		for (int[] openSite: openSites)
+			tested.open(openSite[0], openSite[1]);
 		result = tested.percolates();
 		if (!result && expectation) {
 			System.err.println("Unexpected failure");
@@ -108,19 +105,19 @@ public class Percolation {
 		return true;
 	}
 
-	private static boolean test_constructor_throws(int arg, boolean expectation) {
-		boolean exception_caught = false;
+	private static boolean testConstructorThrows(int arg, boolean expectation) {
+		boolean exceptionCaught = false;
 		try {
 			Percolation foo = new Percolation(arg);
 		}
 		catch (IllegalArgumentException e) {
-			exception_caught = true;
+			exceptionCaught = true;
 		}
-		if (exception_caught && !expectation) {
+		if (exceptionCaught && !expectation) {
 			System.err.println("Exception found for okay argument");
 			return false;
 		}
-		else if (!exception_caught && expectation) {
+		else if (!exceptionCaught && expectation) {
 			System.err.println("No or wrong exception for bad argument");
 			return false;
 		}
@@ -132,22 +129,22 @@ public class Percolation {
 		int total = 0;
 		int[][] works = {{1, 1},		 {1, 3},
 						 {2, 1}, {2, 2},		 {2, 4},
-						 		 {3, 2}, {3, 3},
-						 {4, 1}, 		 {4, 3},};
+								  {3, 2}, {3, 3},
+						 {4, 1},		  {4, 3}};
 		total++;
-		if (test_percolates(4, works, true))
+		if (testPercolates(4, works, true))
 			passes++;
 
 		int[][] bad = {{1, 1},		 {1, 3},
 						{2, 1}, {2, 2},			{2, 4},
 								{3, 2},
-						{4, 1}, 		 {4, 3},};
+						{4, 1},		  {4, 3}};
 		total++;
-		if (test_percolates(4, bad, false))
+		if (testPercolates(4, bad, false))
 			passes++;
 
 		total++;
-		if (test_constructor_throws(0x10000, true))
+		if (testConstructorThrows(0x10000, true))
 			passes++;
 		System.err.println("Tests: " + passes + "/" + total);
 	}

@@ -8,17 +8,15 @@
  * Data type to model physical percolation (say of water through concrete).
  ******************************************************************************/
 
-import java.lang.IllegalArgumentException;
-
 public class PercolationStats {
+	private static final double Z95 = 1.96;
 	private final int N;
 	private double[] results;
-	private static final double Z95 = 1.96;
 
 	// perform T independent computational experiments on an N-by-N grid
-	public PercolationStats(int N, int T) throws IllegalArgumentException {
 		//if (N <= 0 || T <= 0)
 		//	throw IllegalArgumentException("Nonnegative arguments");
+	public PercolationStats(int N, int T) {
 		int i, j, n;
 		Percolation p;
 		this.N = N;
