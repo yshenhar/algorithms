@@ -14,9 +14,9 @@ public class PercolationStats {
 	private double[] results;
 
 	// perform T independent computational experiments on an N-by-N grid
-		//if (N <= 0 || T <= 0)
-		//	throw IllegalArgumentException("Nonnegative arguments");
 	public PercolationStats(int N, int T) {
+		if (N <= 0 || T <= 0)
+			throw new IllegalArgumentException("Nonnegative arguments");
 		int i, j, n;
 		Percolation p;
 		this.N = N;
