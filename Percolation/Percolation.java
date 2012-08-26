@@ -22,11 +22,9 @@ public class Percolation {
 	// create N-by-N grid, with all sites blocked
 	public Percolation(int N) {
 		this.N = N;
-		open = new boolean[N^2];
-		/*	Include two extra spots in the connections list two hold the virtual
-			top and virtual bottom spots.
-		*/
-		paths = new WeightedQuickUnionUF(N^2 + 2);
+		open = new boolean[N*N];
+		// Add two for the virtual top and bottom
+		paths = new WeightedQuickUnionUF(N*N + 2);
 		virtual_top = indexOf(N, N) + 1;
 		virtual_bottom = indexOf(N, N) + 2;
 	}
