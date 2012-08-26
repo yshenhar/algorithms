@@ -20,7 +20,11 @@ public class Percolation {
 	private final int virtual_bottom;
 
 	// create N-by-N grid, with all sites blocked
-	public Percolation(int N) {
+	public Percolation(int N) throws IndexOutOfBoundsException {
+		// The union-find data type we're using indexes its arrays with an int,
+		// so our N^2 sized grid must have N^2 <= 2^32 - 1 <=> N > 2^16.
+		if (N >= 0x10000)
+			throw new IndexOutOfBoundsException("Dimension must be < 2^16");
 		this.N = N;
 		open = new boolean[N*N];
 		// Add two for the virtual top and bottom
