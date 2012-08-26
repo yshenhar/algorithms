@@ -91,7 +91,7 @@ public class Percolation {
 		return (row - 1) * N + (col - 1);
 	}
 
-	private static boolean test(int N, int[][] open_sites, boolean expectation) {
+	private static boolean test_percolates(int N, int[][] open_sites, boolean expectation) {
 		boolean result;
 		Percolation tested = new Percolation(N);
 		for (int[] open_site: open_sites)
@@ -135,7 +135,7 @@ public class Percolation {
 						 		 {3, 2}, {3, 3},
 						 {4, 1}, 		 {4, 3},};
 		total++;
-		if (test(4, works, true))
+		if (test_percolates(4, works, true))
 			passes++;
 
 		int[][] bad = {{1, 1},		 {1, 3},
@@ -143,7 +143,7 @@ public class Percolation {
 								{3, 2},
 						{4, 1}, 		 {4, 3},};
 		total++;
-		if (test(4, bad, false))
+		if (test_percolates(4, bad, false))
 			passes++;
 
 		total++;
