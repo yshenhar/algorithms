@@ -55,18 +55,26 @@ public class Percolation {
 		int index = indexOf(i, j);
 
 		open[index] = true;
-		if (i == 1)
+		if (i == 1) {
 			paths.union(virtual_top, index);
-		if (i == N)
+		}
+		else if (i == N) {
 			paths.union(virtual_bottom, index);
-		if (i < N  && isOpen(i + 1, j))
+		}
+
+		if (i < N  && isOpen(i + 1, j)) {
 			paths.union(indexOf(i + 1, j), index);
-		if (i > 1 && isOpen(i - 1, j))
+		}
+		else if (i > 1 && isOpen(i - 1, j)) {
 			paths.union(indexOf(i - 1, j), index);
-		if (j < N && isOpen(i, j + 1))
+		}
+
+		if (j < N && isOpen(i, j + 1)) {
 			paths.union(indexOf(i, j + 1), index);
-		if (j > 1 && isOpen(i, j - 1))
+		}
+		else if (j > 1 && isOpen(i, j - 1)) {
 			paths.union(indexOf(i, j - 1), index);
+		}
 	}
 
 	/* Convert grid coordinates of the form (x, y) where x,y in {1,...,N}
