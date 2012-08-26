@@ -81,4 +81,30 @@ public class Percolation {
 					"for " + N + "^2 grid.");
 		return (row - 1) * N + (col - 1);
 	}
+
+	private static boolean test(int N, int[][] open_sites) {
+		int row, col;
+		Percolation tested = new Percolation(N);
+		for (int i = 0; i < open_sites.length; i++) {
+			row = open_sites[i][0];
+			col = open_sites[i][1];
+			tested.open(row, col);
+		}
+		return tested.percolates();
+	}
+
+	public static void main(String[] argv) {
+		int[][] works = {{1, 1},		 {1, 3},
+						 {2, 1}, {2, 2},		 {2, 4},
+						 		 {3, 2}, {3, 3},
+						 {4, 1}, 		 {4, 3},};
+		if (!test(4, works))
+			System.err.println("Unexpected failure");
+		int[][] bad = {{1, 1},		 {1, 3},
+						{2, 1}, {2, 2},			{2, 4},
+								{3, 2},
+						{4, 1}, 		 {4, 3},};
+		if (test(4, bad))
+			System.err.println("Unexpected success");
+	}
 }
