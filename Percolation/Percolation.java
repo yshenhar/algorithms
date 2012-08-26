@@ -75,7 +75,7 @@ public class Percolation {
 	Assume the grid is in row-major form.
 	*/
 	private int indexOf(int row, int col) throws IndexOutOfBoundsException {
-		if (row <= 0 || row > N || col <= 0 || col >= N)
+		if (row <= 0 || row > N || col <= 0 || col > N)
 			throw new IndexOutOfBoundsException(
 					"(" + row + ", " + col + ") out of bounds" +
 					"for " + N + "^2 grid.");
