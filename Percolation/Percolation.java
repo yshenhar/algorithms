@@ -83,7 +83,8 @@ public class Percolation {
         return (row - 1) * N + (col - 1);
     }
 
-    private static boolean testPercolates(int N, int[][] openSites, boolean expectation) {
+    private static boolean testPercolates(int N, int[][] openSites,
+            boolean expectation) {
         boolean result;
         Percolation tested = new Percolation(N);
         for (int[] openSite: openSites)
