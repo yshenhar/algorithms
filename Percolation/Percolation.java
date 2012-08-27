@@ -56,7 +56,8 @@ public class Percolation {
 
 		if (i == 1)
 			paths.union(virtualTop, index);
-		else if (i == N)
+		else if (i == N && (isFull(i - 1, j) || j > 1 && isFull(i, j - 1)
+				|| j < N && isFull(i, j + 1)))
 			paths.union(virtualBottom, index);
 
 		if (i < N  && isOpen(i + 1, j))
