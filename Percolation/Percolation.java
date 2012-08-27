@@ -12,7 +12,8 @@ public class Percolation {
 
     private final int N; // Length of one side of the grid.
     private boolean[] open;
-    private WeightedQuickUnionUF paths;
+    private WeightedQuickUnionUF percolation;
+    private WeightedQuickUnionUF fullness;
     private final int virtualTop;
     private final int virtualBottom;
 
@@ -26,7 +27,8 @@ public class Percolation {
         this.N = N;
         open = new boolean[N*N];
         // Add two for the virtual top and bottom
-        paths = new WeightedQuickUnionUF(N*N + 2);
+        percolation = new WeightedQuickUnionUF(N*N + 2);
+        fullness = new WeightedQuickUnionUF(N*N + 2);
         virtualTop = indexOf(N, N) + 1;
         virtualBottom = indexOf(N, N) + 2;
     }
@@ -38,12 +40,12 @@ public class Percolation {
 
     // is site (row i, column j) full?
     public boolean isFull(int i, int j) {
-        return paths.connected(virtualTop, indexOf(i, j));
+        return fullness.connected(virtualTop, indexOf(i, j));
     }
 
     // does the system percolate?
     public boolean percolates() {
-        return paths.connected(virtualTop, virtualBottom);
+        return percolation.connected(virtualTop, virtualBottom);
     }
 
     // open site (row i, column j) if it is not already
@@ -54,20 +56,30 @@ public class Percolation {
 
         open[index] = true;
 
-        if (i == 1)
-            paths.union(virtualTop, index);
-        if (i == N && (N == 1 || isFull(i - 1, j)))
-            paths.union(virtualBottom, index);
+        if (i == 1) {
+            percolation.union(virtualTop, index);
+            fullness.union(virtualTop, index);
+        }
+        if (i == N)
+            percolation.union(virtualBottom, index);
 
-        if (i < N  && isOpen(i + 1, j))
-            paths.union(indexOf(i + 1, j), index);
-        if (i > 1 && isOpen(i - 1, j))
-            paths.union(indexOf(i - 1, j), index);
+        if (i < N  && isOpen(i + 1, j)) {
+            percolation.union(indexOf(i + 1, j), index);
+            fullness.union(indexOf(i + 1, j), index);
+        }
+        if (i > 1 && isOpen(i - 1, j)) {
+            percolation.union(indexOf(i - 1, j), index);
+            fullness.union(indexOf(i - 1, j), index);
+        }
 
-        if (j < N && isOpen(i, j + 1))
-            paths.union(indexOf(i, j + 1), index);
-        if (j > 1 && isOpen(i, j - 1))
-            paths.union(indexOf(i, j - 1), index);
+        if (j < N && isOpen(i, j + 1)) {
+            percolation.union(indexOf(i, j + 1), index);
+            fullness.union(indexOf(i, j + 1), index);
+        }
+        if (j > 1 && isOpen(i, j - 1)) {
+            percolation.union(indexOf(i, j - 1), index);
+            fullness.union(indexOf(i, j - 1), index);
+        }
     }
 
     /* Convert grid coordinates of the form (x, y) where x,y in {1,...,N}
