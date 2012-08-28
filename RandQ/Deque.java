@@ -166,8 +166,8 @@ public class Deque<Item> implements Iterable<Item> {
     private static boolean testOrder(boolean ascending, boolean inFirst,
             boolean outFirst) {
         int max = 0xff; // Use an int to avoid arithmetic overflow
-        int[] seq = new int[max + 1];
-        for (int i = 0; i <= max; i++) {
+        int[] seq = new int[max];
+        for (int i = 0; i < max; i++) {
             if (ascending)
                 seq[i] = i;
             else
