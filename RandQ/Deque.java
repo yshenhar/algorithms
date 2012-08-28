@@ -170,7 +170,7 @@ public class Deque<Item> implements Iterable<Item> {
             if (ascending)
                 seq[i] = i;
             else
-                seq[i] = max - i;
+                seq[i] = max - i - 1;
         }
         Deque<Integer> deque = new Deque<Integer>();
 
@@ -187,14 +187,14 @@ public class Deque<Item> implements Iterable<Item> {
         assert deque.size() == max;
 
         int j;
-        if (ascending == inFirst) j = max;
+        if (ascending == inFirst) j = max - 1;
         else j = 0;
         for (int next: deque) {
             assert next == j;
             if (ascending == inFirst) j--;
             else j++;
         }
-        if (ascending == inFirst) assert j == 0;
+        if (ascending == inFirst) assert j == -1;
         else assert j == max;
 
         assert deque.size() == max;
@@ -208,7 +208,7 @@ public class Deque<Item> implements Iterable<Item> {
             }
         }
         else if (ascending) {
-            for (int i = max; i >= 0; i--) {
+            for (int i = max - 1; i >= 0; i--) {
                 if (outFirst)
                     assert deque.removeFirst() == i;
                 else
@@ -216,7 +216,7 @@ public class Deque<Item> implements Iterable<Item> {
             }
         }
         else {
-            for (int i = 0; i <= max; i++) {
+            for (int i = 0; i < max; i++) {
                 if (outFirst)
                     assert deque.removeFirst() == i;
                 else
