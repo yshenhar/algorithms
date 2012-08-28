@@ -174,6 +174,9 @@ public class Deque<Item> implements Iterable<Item> {
         }
         Deque<Integer> deque = new Deque<Integer>();
 
+        // Loop twice to make sure we can fill, empty, and refill the deque
+        boolean[] twoThings = {false, true};
+        for (boolean doItTwice: twoThings) {
         if (deque.size() != 0)
             return false;
 
@@ -237,6 +240,8 @@ public class Deque<Item> implements Iterable<Item> {
         }
 
         assert deque.size() == 0;
+
+        }
 
         return true;
     }
