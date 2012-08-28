@@ -179,22 +179,22 @@ public class Deque<Item> implements Iterable<Item> {
         for (boolean doItTwice: twoThings) {
             assert deque.size() == 0;
 
-        for (int i : seq) {
-            if (inFirst)
-                deque.addFirst(i);
-            else
-                deque.addLast(i);
-        }
+            for (int i : seq) {
+                if (inFirst)
+                    deque.addFirst(i);
+                else
+                    deque.addLast(i);
+            }
 
-        assert deque.size() == max;
+            assert deque.size() == max;
 
-        int j;
-        if (ascending == inFirst) j = max - 1;
-        else j = 0;
-        for (int next: deque) {
-            assert next == j;
-            if (ascending == inFirst) j--;
-            else j++;
+            int j;
+            if (ascending == inFirst) j = max - 1;
+            else j = 0;
+            for (int next: deque) {
+                assert next == j;
+                if (ascending == inFirst) j--;
+                else j++;
 
                 // Test that multiple iterators can work simultaneously
                 int k;
@@ -207,38 +207,38 @@ public class Deque<Item> implements Iterable<Item> {
                 }
                 if (ascending == inFirst) assert k == -1;
                 else assert k == max;
-        }
-        if (ascending == inFirst) assert j == -1;
-        else assert j == max;
-
-        assert deque.size() == max;
-
-        if (inFirst != outFirst) {
-            for (int i : seq) {
-                if (outFirst)
-                    assert deque.removeFirst() == i;
-                else
-                    assert deque.removeLast() == i;
             }
-        }
-        else if (ascending) {
-            for (int i = max - 1; i >= 0; i--) {
-                if (outFirst)
-                    assert deque.removeFirst() == i;
-                else
-                    assert deque.removeLast() == i;
-            }
-        }
-        else {
-            for (int i = 0; i < max; i++) {
-                if (outFirst)
-                    assert deque.removeFirst() == i;
-                else
-                    assert deque.removeLast() == i;
-            }
-        }
+            if (ascending == inFirst) assert j == -1;
+            else assert j == max;
 
-        assert deque.size() == 0;
+            assert deque.size() == max;
+
+            if (inFirst != outFirst) {
+                for (int i : seq) {
+                    if (outFirst)
+                        assert deque.removeFirst() == i;
+                    else
+                        assert deque.removeLast() == i;
+                }
+            }
+            else if (ascending) {
+                for (int i = max - 1; i >= 0; i--) {
+                    if (outFirst)
+                        assert deque.removeFirst() == i;
+                    else
+                        assert deque.removeLast() == i;
+                }
+            }
+            else {
+                for (int i = 0; i < max; i++) {
+                    if (outFirst)
+                        assert deque.removeFirst() == i;
+                    else
+                        assert deque.removeLast() == i;
+                }
+            }
+
+            assert deque.size() == 0;
 
         }
 
