@@ -101,22 +101,21 @@ public class Deque<Item> implements Iterable<Item> {
 
     private class DequeIterator implements Iterator<Item> {
 
-        private Node cursor = sentinel.next;
+        private Node cursor = sentinel;
 
         public void remove() {
             throw new UnsupportedOperationException();
         }
 
         public boolean hasNext() {
-            return cursor.next == sentinel;
+            return cursor.next != sentinel;
         }
 
         public Item next() {
             if (!hasNext())
                 throw new NoSuchElementException();
-            Item result = cursor.item;
             cursor = cursor.next;
-            return result;
+            return cursor.item;
         }
     }
 
