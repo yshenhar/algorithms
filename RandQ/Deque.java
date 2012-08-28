@@ -193,6 +193,18 @@ public class Deque<Item> implements Iterable<Item> {
             assert next == j;
             if (ascending == inFirst) j--;
             else j++;
+
+                // Test that multiple iterators can work simultaneously
+                int k;
+                if (ascending == inFirst) k = max - 1;
+                else k = 0;
+                for (int nextk: deque) {
+                    assert nextk == k;
+                    if (ascending == inFirst) k--;
+                    else k++;
+                }
+                if (ascending == inFirst) assert k == -1;
+                else assert k == max;
         }
         if (ascending == inFirst) assert j == -1;
         else assert j == max;
