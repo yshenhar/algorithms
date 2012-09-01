@@ -39,7 +39,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 	    if (item == null)
 	        throw new NullPointerException("Queue does not support nulls");
 	    if (N == q.length)
-	        resize(N + N);
+            resize(N << 1);
 	    q[N++] = item;
     }
 
@@ -59,7 +59,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 	    downsize when the array is a quarter full.
 	    */
 	    else if ((N + 1) * 4 < q.length)
-	        resize(N >> 2);
+            resize(N >> 1);
 	    exchange(q, StdRandom.uniform(N), --N);
 	    return q[N];
     }
