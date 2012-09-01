@@ -29,7 +29,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     private void resize(int capacity) {
         assert capacity >= N;
         Item[] newq = (Item[]) new Object[capacity];
-        for (int i = 0; i < q.length; i++)
+        for (int i = 0; i < N; i++)
             newq[i] = q[i];
         q = newq;
     }
