@@ -61,7 +61,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 	    else if ((N + 1) * 4 < q.length)
             resize(N >> 1);
 	    exchange(q, StdRandom.uniform(N), --N);
-	    return q[N];
+        Item result = q[N];
+        q[N] = null;
+        return result;
     }
 
     // Swap entries i & j in the array a.
