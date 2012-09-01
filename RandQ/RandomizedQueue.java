@@ -3,15 +3,15 @@ import java.util.Iterator;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
 
+    private static final int INIT_CAPACITY = 2;
     private Item[] q;
     private int N = 0;
-    private final static int initCapacity = 2;
 
 	// construct an empty randomized queue
 	@SuppressWarnings("unchecked")
 	public RandomizedQueue() {
-	    assert initCapacity > 0;
-	    q = (Item[]) new Object[initCapacity]; // Will produce warning. Ignore.
+        assert INIT_CAPACITY > 0;
+        q = (Item[]) new Object[INIT_CAPACITY]; // Will produce warning. Ignore.
     }
 
 	// is the queue empty?
