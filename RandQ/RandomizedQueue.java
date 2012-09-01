@@ -53,12 +53,12 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         if (N == 0)
             throw new NoSuchElementException("Empty queue");
         /* The advantage of adding 1 below is that the following lines won't
-        halve the size of the array unless it's at least 4 in the worst case
-        when N == 0. This is important because 4 is the smallest integer i for
-        which i >> 2 > 0. Finally note that as N gets large, these lines only
-        downsize when the array is a quarter full.
+        halve the size of the array unless it's at least 2 in the worst case
+        when N == 0. This is important because 1 >> 1 == 0. Finally note that as
+        N gets large, these lines only downsize when the array is a quarter
+        full.
         */
-        else if ((N + 1) * 4 < q.length)
+        else if ((N + 1) * 2 < q.length)
             resize(N >> 1);
         exchange(q, StdRandom.uniform(N), --N);
         Item result = q[N];
