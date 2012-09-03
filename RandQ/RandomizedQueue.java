@@ -100,4 +100,17 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             throw new UnsupportedOperationException("Can't remove");
         }
     }
+
+    // For manual testing. An integer argument is pushed down. A dash pops off
+    // a random item in the queue. A good test sequence is
+    // java -ea RandomizedQueue 0 - 1 - 2
+    public static void main(String[] args) {
+        RandomizedQueue<Integer> q = new RandomizedQueue<Integer>();
+        for (String arg: args) {
+            if (arg.equals("-"))
+                System.out.println(q.dequeue());
+            else
+                q.enqueue(Integer.parseInt(arg));
+        }
+    }
 }
