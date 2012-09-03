@@ -27,7 +27,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     // Resize array when necessary
     @SuppressWarnings("unchecked")
     private void resize(int capacity) {
-        assert capacity >= N;
+        assert capacity >= N && capacity > 0;
         Item[] newq = (Item[]) new Object[capacity];
         for (int i = 0; i < N; i++)
             newq[i] = q[i];
@@ -55,7 +55,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         exchange(q, StdRandom.uniform(N), --N);
         Item result = q[N];
         q[N] = null;
-        if (N * 4 < q.length)
+        if (N * 4 < q.length && q.length > 1)
             resize(q.length >> 1);
         return result;
     }
