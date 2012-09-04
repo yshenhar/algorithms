@@ -112,5 +112,11 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             else
                 q.enqueue(Integer.parseInt(arg));
         }
+        System.out.println("Remaining in the queue:");
+        for (int i: q)
+            System.out.println(i);
+        System.out.println("Shown again for checking iterator consistency:");
+        for (int j: q)
+            System.out.println(j);
     }
 }
