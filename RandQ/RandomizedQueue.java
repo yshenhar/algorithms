@@ -109,8 +109,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     // For manual testing. An integer argument is pushed down. A dash pops off
-    // a random item in the queue. A good test sequence is
+    // a random item in the queue. Good test sequences are
     // java -ea RandomizedQueue 0 - 1 - 2
+    // java RandomizedQueue 1 - 2 - 3 - 4 5 6 7 8 9 10 11 12 13 14
     public static void main(String[] args) {
         RandomizedQueue<Integer> q = new RandomizedQueue<Integer>();
         for (String arg: args) {
