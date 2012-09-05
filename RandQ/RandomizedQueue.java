@@ -83,17 +83,24 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     private class RandomizedQueueIterator implements Iterator<Item> {
-        private int tail = N;
+        private int count = N;
+        private int[] idx;
+
+        public RandomizedQueueIterator() {
+            idx = new int[count];
+            for (int i = 0; i < count; i++)
+                idx[i] = i;
+            StdRandom.shuffle(idx);
+        }
 
         public boolean hasNext() {
-            return tail > 0;
+            return count > 0;
         }
 
         public Item next() {
-            if (tail == 0)
+            if (!hasNext())
                 throw new NoSuchElementException();
-            exchange(q, StdRandom.uniform(tail), --tail);
-            return q[tail];
+            return q[idx[--count]];
         }
 
         public void remove() {
