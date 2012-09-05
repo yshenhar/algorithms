@@ -108,15 +108,27 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         RandomizedQueue<Integer> q = new RandomizedQueue<Integer>();
         for (String arg: args) {
             if (arg.equals("-"))
-                System.out.println(q.dequeue());
+                System.out.print(q.dequeue() + " ");
             else
                 q.enqueue(Integer.parseInt(arg));
         }
+        System.out.println("\nNumbers remaining in the queue: " + q.size());
         System.out.println("Remaining in the queue:");
-        for (int i: q)
-            System.out.println(i);
+        int count = 0;
+        Iterator<Integer> it = q.iterator();
+        int i = 0;
+        while (it.hasNext()) {
+            i = it.next();
+            count++;
+            System.out.print(i + " ");
+        }
+        System.out.println("\nFound " + count + " numbers.");
         System.out.println("Shown again for checking iterator consistency:");
-        for (int j: q)
-            System.out.println(j);
+        count = 0;
+        for (int j: q) {
+            count++;
+            System.out.print(j + " ");
+        }
+        System.out.println("\nFound " + count + " numbers.");
     }
 }
