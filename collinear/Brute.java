@@ -26,7 +26,7 @@ public class Brute {
      *
      *  Return an array of Point objects.
      */
-    private static Point[] readInput(String filename) {
+    protected static Point[] readInput(String filename) {
         In in = new In(filename);
         int n = in.readInt();
         Point[] points = new Point[n];
@@ -37,7 +37,7 @@ public class Brute {
     }
 
     // Confirm an array of points is sorted
-    private static boolean sorted(Point[] points) {
+    protected static boolean sorted(Point[] points) {
         int n = points.length;
         if (n < 2)
             return true;
@@ -66,7 +66,7 @@ public class Brute {
      *  Example:
      *  (10000, 0) -> (7000, 3000) -> (3000, 7000) -> (0, 10000)
      */
-    private static void printLineSegment(Point[] points) {
+    protected static void printLineSegment(Point[] points) {
         assert sorted(points);
         int end = points.length - 1;
         if (end > 0) {
@@ -81,7 +81,7 @@ public class Brute {
      *
      *  points is a SORTED array of Point objects
      */
-    private static void draw(Point[] points) {
+    protected static void draw(Point[] points) {
         assert sorted(points);
         for (int i = points.length - 1; i > 0;) {
             points[i].drawTo(points[--i]);
@@ -90,14 +90,14 @@ public class Brute {
     }
 
     // Output a given set of points found to be collinear. points is an array.
-    private static void output(Point[] points) {
+    protected static void output(Point[] points) {
         Arrays.sort(points);
         printLineSegment(points);
         draw(points);
     }
 
     // Checks whether the points in the array are collinear
-    private static boolean collinear(Point[] points) {
+    protected static boolean collinear(Point[] points) {
         if (points.length == 2)
             return true;
         Point base = points[0]; // Error if nonsensical number of points.
