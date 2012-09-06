@@ -19,6 +19,12 @@ import java.util.Arrays;
 
 public class Brute {
 
+    protected static void setUpDrawing() {
+        StdDraw.setXscale(0, 32768);
+        StdDraw.setYscale(0, 32768);
+        StdDraw.show(0);
+    }
+
     /** Read input files of points
      *
      *  First line gives the number of points; each subsequent line gives two
@@ -111,9 +117,7 @@ public class Brute {
     }
 
     public static void main(String[] args) {
-        StdDraw.setXscale(0, 32768);
-        StdDraw.setYscale(0, 32768);
-        StdDraw.show(0);
+        setUpDrawing();
         Point[] points = readInput(args[0]);
 
         /** Iterate through all combinations
