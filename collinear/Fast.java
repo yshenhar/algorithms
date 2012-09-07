@@ -41,7 +41,7 @@ public class Fast extends Brute {
                 start = stop - 1;
                 while (stop < n && last == points[i].slopeTo(scratch[stop]))
                     stop++;
-                if (stop - start  + 1 >= MIN_POINTS) // Add one for points[i].
+                if (stop - start + 1 >= MIN_POINTS) // Add one for points[i].
                     output(points[i], scratch, start, stop);
             } while (stop < n - 2);
         }
