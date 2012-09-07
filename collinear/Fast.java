@@ -18,12 +18,12 @@ public class Fast extends Brute {
         Point[] points = readInput(args[0]);
         int n = points.length;
 
-        Point[] scratch = new Point[n];
         int start, stop; // Pointers to the beginning and end of runs.
         double last, next; // To hold subsequent slopes.
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++)
-                scratch[j] = points[j];
+        for (int i = 0; i < n - 1; i++) {
+            Point[] scratch = new Point[n - i];
+            for (int j = i; j < n; j++)
+                scratch[j - i] = points[j];
             Arrays.sort(scratch, points[i].SLOPE_ORDER);
             stop = 0;
             do {
@@ -35,13 +35,13 @@ public class Fast extends Brute {
                     stop += 1;
                     last = next;
                     next = points[i].slopeTo(scratch[stop]);
-                } while (stop < n - 1 && last != next);
+                } while (stop < n - i - 1 && last != next);
                 start = stop - 1;
-                while (stop < n && last == points[i].slopeTo(scratch[stop]))
+                while (stop < n - i && last == points[i].slopeTo(scratch[stop]))
                     stop++;
                 if (stop - start + 1 >= MIN_POINTS) // Add one for points[i].
                     output(points[i], scratch, start, stop);
-            } while (stop < n - 1);
+            } while (stop < n - i - 1);
         }
         StdDraw.show(0);
     }
