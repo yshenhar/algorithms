@@ -19,6 +19,9 @@ import java.util.Arrays;
 
 public class Brute {
 
+    // Number of collinear points to look for.
+    protected static final int MIN_POINTS = 4;
+
     protected static void setUpDrawing() {
         StdDraw.setXscale(0, 32768);
         StdDraw.setYscale(0, 32768);
