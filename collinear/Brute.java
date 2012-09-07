@@ -14,7 +14,6 @@
  *
  *************************************************************************/
 
-import java.util.Iterator;
 import java.util.Arrays;
 
 public class Brute {
@@ -56,12 +55,13 @@ public class Brute {
             cmp = points[i].compareTo(points[++i]);
         } while (cmp == 0 && i < n);
         assert cmp != 0 || i == n; // If i == n then cmp's value doesn't matter.
-        cmp = (cmp < 0) ? -1 : 1;
+        if (cmp < 0) cmp = -1;
+        else cmp = 1;
         int nextcmp;
         while (i < n - 1) {
             nextcmp = points[i].compareTo(points[++i]);
-            if (nextcmp != 0)
-                nextcmp = (nextcmp < 0) ? -1 : 1;
+            if      (nextcmp < 0) nextcmp = -1;
+            else if (nextcmp > 0) nextcmp = 1;
             if (cmp != nextcmp && nextcmp != 0)
                 return false;
         }
@@ -92,8 +92,8 @@ public class Brute {
      */
     protected static void draw(Point[] points) {
         assert sorted(points);
-        for (int i = points.length - 1; i > 0;) {
-            points[i].drawTo(points[--i]);
+        for (int i = points.length - 1; i > 0; i--) {
+            points[i].drawTo(points[i - 1]);
         }
     }
 
@@ -110,9 +110,9 @@ public class Brute {
             return true;
         Point base = points[0]; // Error if nonsensical number of points.
         double slope = base.slopeTo(points[1]);
-        for (int i = 2; i < points.length; ) {
+        for (int i = 2; i < points.length; i++) {
             // May need to improve equality test.
-            if (slope != base.slopeTo(points[i++]))
+            if (slope != base.slopeTo(points[i]))
                 return false;
         }
         return true;
@@ -137,7 +137,7 @@ public class Brute {
         Point[] result = new Point[4];
         int[] f = {0, 0, 0, 0};
         int n = points.length;
-        for             (f[0] = 0       ; f[0] < n; f[0]++) {
+        for             (f[0] = 0;        f[0] < n; f[0]++) {
             points[f[0]].draw();
             for         (f[1] = f[0] + 1; f[1] < n; f[1]++) {
                 for     (f[2] = f[1] + 1; f[2] < n; f[2]++) {
