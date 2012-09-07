@@ -24,25 +24,25 @@ public class Fast extends Brute {
             for (int j = 0; j < n; j++)
                 scratch[j] = points[j];
             Arrays.sort(scratch, points[i].SLOPE_ORDER);
-            // 0 1 2 2 2 3
-            stop = -1;
+            stop = 0;
             do {
                 // Invariant: We're looking at the subarray that begins right
                 // after the last run.
-                next = scratch[++stop].slopeTo(scratch[++stop]);
+                next = points[i].slopeTo(scratch[stop]);
                 // Gallop the stop pointer rightward to look for a run.
                 do {
+                    stop += 1;
                     last = next;
-                    next = points[stop].slopeTo(scratch[++stop]);
+                    next = points[i].slopeTo(scratch[stop]);
                 } while (stop < n - 1 && last != next);
-                if (stop == n - 1)
+                if (stop >= n)
                     break;
                 start = stop - 1;
-                // Leave start in place and move stop rightward to end of run.
-                while (stop < n - 1 && last == scratch[stop].slopeTo(scratch[++stop]));
-                if (stop - start > MIN_POINTS)
+                while (stop < n && last == points[i].slopeTo(scratch[stop]))
+                    stop++;
+                if (stop - start  + 1 >= MIN_POINTS) // Add one for points[i].
                     output(scratch, start, stop);
-            } while (stop < n - 3);
+            } while (stop < n - 2);
         }
         StdDraw.show(0);
     }
