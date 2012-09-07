@@ -18,10 +18,7 @@ import java.util.Arrays;
 
 public class Brute {
 
-    // Number of collinear points to look for.
-    protected static final int MIN_POINTS = 4;
-
-    protected static void setUpDrawing() {
+    private static void setUpDrawing() {
         StdDraw.setXscale(0, 32768);
         StdDraw.setYscale(0, 32768);
         StdDraw.show(0);
@@ -34,7 +31,7 @@ public class Brute {
      *
      *  Return an array of Point objects.
      */
-    protected static Point[] readInput(String filename) {
+    private static Point[] readInput(String filename) {
         In in = new In(filename);
         int n = in.readInt();
         Point[] points = new Point[n];
@@ -45,7 +42,7 @@ public class Brute {
     }
 
     // Confirm an array of points is sorted
-    protected static boolean sorted(Point[] points) {
+    private static boolean sorted(Point[] points) {
         int n = points.length;
         if (n < 2)
             return true;
@@ -75,7 +72,7 @@ public class Brute {
      *  Example:
      *  (10000, 0) -> (7000, 3000) -> (3000, 7000) -> (0, 10000)
      */
-    protected static void printLineSegment(Point[] points) {
+    private static void printLineSegment(Point[] points) {
         assert sorted(points);
         int end = points.length - 1;
         if (end > 0) {
@@ -90,7 +87,7 @@ public class Brute {
      *
      *  points is a SORTED array of Point objects
      */
-    protected static void draw(Point[] points) {
+    private static void draw(Point[] points) {
         assert sorted(points);
         for (int i = points.length - 1; i > 0; i--) {
             points[i].drawTo(points[i - 1]);
@@ -98,14 +95,14 @@ public class Brute {
     }
 
     // Output a given set of points found to be collinear. points is an array.
-    protected static void output(Point[] points) {
+    private static void output(Point[] points) {
         Arrays.sort(points);
         printLineSegment(points);
         draw(points);
     }
 
     // Checks whether the points in the array are collinear
-    protected static boolean collinear(Point[] points) {
+    private static boolean collinear(Point[] points) {
         if (points.length == 2)
             return true;
         Point base = points[0]; // Error if nonsensical number of points.
