@@ -2,10 +2,11 @@ import java.util.Arrays;
 
 public class Fast extends Brute {
 
-    protected static void output(Point[] points, int start, int stop) {
-        Point[] scratch = new Point[stop - start];
+    protected static void output(Point origin, Point[] points, int start, int stop) {
+        Point[] scratch = new Point[stop - start + 1];
+        scratch[0] = origin;
         for (int i = start; i < stop; i++)
-            scratch[i] = points[i];
+            scratch[i - start + 1] = points[i];
         Arrays.sort(scratch);
         printLineSegment(scratch);
         draw(scratch);
@@ -41,7 +42,7 @@ public class Fast extends Brute {
                 while (stop < n && last == points[i].slopeTo(scratch[stop]))
                     stop++;
                 if (stop - start  + 1 >= MIN_POINTS) // Add one for points[i].
-                    output(scratch, start, stop);
+                    output(points[i], scratch, start, stop);
             } while (stop < n - 2);
         }
         StdDraw.show(0);
