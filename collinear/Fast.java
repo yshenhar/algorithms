@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class Fast extends Brute {
+public class Fast {
 
     // Number of collinear points to look for.
     private static final int MIN_POINTS = 4;
