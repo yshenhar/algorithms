@@ -44,7 +44,7 @@ public class Point implements Comparable<Point> {
     public double slopeTo(Point that) {
         if (that.x == this.x) {
             if (that.y == this.y)
-                return -Double.NEGATIVE_INFINITY;
+                return Double.NEGATIVE_INFINITY;
             return Double.POSITIVE_INFINITY;
         }
         if (that.y == this.y)
@@ -77,6 +77,21 @@ public class Point implements Comparable<Point> {
 
     // unit test
     public static void main(String[] args) {
-        /* YOUR CODE HERE */
+        Point p, q, r;
+        p = new Point(87, 479);
+        q = new Point(87, 479);
+        assert p.slopeTo(q) == Double.NEGATIVE_INFINITY;
+        p = new Point(25681, 22210);
+        q = new Point(25681, 22210);
+        assert p.slopeTo(q) == Double.NEGATIVE_INFINITY;
+        p = new Point(3, 4);
+        q = new Point(3, 4);
+        assert p.slopeTo(q) == Double.NEGATIVE_INFINITY;
+        p = new Point(8, 5);
+        q = new Point(9, 4);
+        r = new Point(8, 5);
+        assert p.SLOPE_ORDER.compare(q, r) == 1;
+        assert p.slopeTo(q)    == -1.0;
+        assert p.slopeTo(r)    == Double.NEGATIVE_INFINITY;
     }
 }
