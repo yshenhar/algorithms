@@ -102,6 +102,7 @@ public class Fast {
         int start, stop; // Pointers to the beginning and end of runs.
         double last, next; // To hold subsequent slopes.
         for (int i = 0; i < n - MIN_POINTS; i++) {
+            points[i].draw();
             if (i > 0 && points[i].compareTo(points[i - 1]) == 0)
                 continue;
             Point[] scratch = new Point[n - i];
