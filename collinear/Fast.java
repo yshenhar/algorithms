@@ -86,6 +86,7 @@ public class Fast {
         scratch[0] = origin;
         for (int i = start; i < stop; i++)
             scratch[i - start + 1] = points[i];
+        assert scratch[stop - start] != null;
         Arrays.sort(scratch);
         printLineSegment(scratch);
         draw(scratch);
