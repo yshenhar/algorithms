@@ -76,9 +76,7 @@ public class Fast {
      */
     private static void draw(Point[] points) {
         assert sorted(points);
-        for (int i = points.length - 1; i > 0; i--) {
-            points[i].drawTo(points[i - 1]);
-        }
+        points[0].drawTo(points[points.length - 1]);
     }
 
     private static void output(Point origin, Point[] points, int start, int stop) {

@@ -89,9 +89,7 @@ public class Brute {
      */
     private static void draw(Point[] points) {
         assert sorted(points);
-        for (int i = points.length - 1; i > 0; i--) {
-            points[i].drawTo(points[i - 1]);
-        }
+        points[0].drawTo(points[points.length - 1]);
     }
 
     // Output a given set of points found to be collinear. points is an array.
