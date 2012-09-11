@@ -98,9 +98,12 @@ public class Fast {
         Point[] points = readInput(args[0]);
         int n = points.length;
 
+        Arrays.sort(points);
         int start, stop; // Pointers to the beginning and end of runs.
         double last, next; // To hold subsequent slopes.
-        for (int i = 0; i < n - 1; i++) {
+        for (int i = 0; i < n - MIN_POINTS; i++) {
+            if (i > 0 && points[i].compareTo(points[i - 1]) == 0)
+                continue;
             Point[] scratch = new Point[n - i];
             for (int j = i; j < n; j++)
                 scratch[j - i] = points[j];
