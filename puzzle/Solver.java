@@ -22,8 +22,7 @@ public class Solver {
 
     // find a solution to the initial board (using the A* algorithm)
     public Solver(Board initial) {
-        Board twin = initial.twin();
-        SearchNode result = solve(initial, twin);
+        result = solve(initial, initial.twin());
     }
 
     private SearchNode step(MinPQ<SearchNode> pq) {
