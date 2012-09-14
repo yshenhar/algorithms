@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 public class Board {
 
-    private final int[][] blocks;
+    private final short[][] blocks;
     private final int dim;
     private int cachedManhattan = -1;
 
@@ -13,10 +13,27 @@ public class Board {
         dim = blocks.length;
     }
 
+    private Board(short[][] blocks) {
+        this.blocks = copySquareArray(blocks);
+        dim = blocks.length;
+    }
+
     // Copy a square array.
-    private int[][] copySquareArray(int[][] original) {
+    private short[][] copySquareArray(int[][] original) {
         int len = original.length;
-        int[][] copy = new int[len][len];
+        short[][] copy = new short[len][len];
+        for (int row = 0; row < len; row++) {
+            assert original[row].length == len;
+            for (int col = 0; col < len; col++)
+                // Assignment guarantees dim < 128, so casting is safe.
+                copy[row][col] = (short) original[row][col];
+        }
+        return copy;
+    }
+
+    private short[][] copySquareArray(short[][] original) {
+        int len = original.length;
+        short[][] copy = new short[len][len];
         for (int row = 0; row < len; row++) {
             assert original[row].length == len;
             for (int col = 0; col < len; col++)
@@ -70,14 +87,15 @@ public class Board {
         int value = 1;
         for (int row = 0; row < dim; row++)
             for (int col = 0; col < dim; col++)
-                if (blocks[row][col] != value++ && (row != dim - 1 || col != dim - 1))
+                if (blocks[row][col] != value++
+                        && (row != dim - 1 || col != dim - 1))
                     return false;
         return true;
     }
 
     // a board obtained by exchanging two adjacent blocks in the same row
     public Board twin() {
-        int[][] copy = copySquareArray(blocks);
+        short[][] copy = copySquareArray(blocks);
         if (dim <= 1)
             return new Board(copy);
         // Find zero so that we don't exchange with the blank
@@ -85,8 +103,8 @@ public class Board {
         // in O(1).
         int row = 0;
         int col = 0;
-        int value = 0;
-        int lastValue = blocks[0][0];
+        short value = 0;
+        short lastValue = blocks[0][0];
         zerosearch:
         for (row = 0; row < dim; row++) {
             for (col = 0; col < dim; col++) {
@@ -115,10 +133,10 @@ public class Board {
         return true;
     }
 
-    private int[][] swap(int[][] array, int fromRow, int fromCol, int toRow,
+    private short[][] swap(short[][] array, int fromRow, int fromCol, int toRow,
                          int toCol) {
-        int[][] copy = copySquareArray(array);
-        int tmp = copy[toRow][toCol];
+        short[][] copy = copySquareArray(array);
+        short tmp = copy[toRow][toCol];
         copy[toRow][toCol] = copy[fromRow][fromCol];
         copy[fromRow][fromCol] = tmp;
         return copy;
