@@ -1,0 +1,429 @@
+Submission
+Submission time	Fri-14-Sep 00:54:22
+Raw Score	100.00 / 100.00
+Feedback	See the Assessment Guide for information on how to read this report.
+Assessment Summary
+
+Compilation: PASSED
+Style: PASSED
+API: PASSED
+
+Correctness: 25/25 tests passed
+Memory: 8/8 tests passed
+Timing: 18/18 tests passed
+
+Raw score: 100.00% [Correctness: 65%, Memory: 10%, Timing: 25%, Style: 0%]
+Assessment Details
+files submitted
+----------------------------------
+total 20K
+-rw-r--r-- 1 5.9K Sep 14 04:54 Board.java
+-rw-r--r-- 1 3.2K Sep 14 04:54 Solver.java
+drwxr-xr-x 2 4.0K Sep 14 04:54 __MACOSX
+-rw-r--r-- 1 3.5K Sep 14 04:54 studentSubmission.zip
+
+
+******************************************************************************
+*  compiling
+******************************************************************************
+
+
+% javac Board.java
+*-----------------------------------------------------------
+================================================================
+
+% javac Solver.java
+*-----------------------------------------------------------
+================================================================
+
+
+
+% checkstyle *.java
+*-----------------------------------------------------------
+================================================================
+
+
+% findbugs *.class
+*-----------------------------------------------------------
+================================================================
+
+
+Testing the APIs of your programs.
+*-----------------------------------------------------------
+Board:
+
+Solver:
+
+================================================================
+
+
+******************************************************************************
+*  executing
+******************************************************************************
+
+Testing methods in Board
+*-----------------------------------------------------------
+Running 15 total tests.
+
+Test 1: Test hamming() with file inputs to ensure that it calculates the correct distance
+  *  puzzle04.txt
+  *  puzzle00.txt
+  *  puzzle07.txt
+  *  puzzle17.txt
+  *  puzzle27.txt
+  *  puzzle2x2-unsolvable1.txt
+==> passed
+
+Test 2: Test hamming() with random puzzle states
+  *  2-by-2
+  *  3-by-3
+  *  4-by-4
+  *  5-by-5
+  *  9-by-9
+  *  10-by-10
+==> passed
+
+Test 3: Test manhattan() with file inputs
+  *  puzzle04.txt
+  *  puzzle00.txt
+  *  puzzle07.txt
+  *  puzzle17.txt
+  *  puzzle27.txt
+  *  puzzle2x2-unsolvable1.txt
+==> passed
+
+Test 4: Test manhattan() with random puzzle states
+  *  2-by-2
+  *  3-by-3
+  *  4-by-4
+  *  5-by-5
+  *  9-by-9
+  *  10-by-10
+==> passed
+
+Test 5: Test dimension() with random puzzle states
+  *  2-by-2
+  *  3-by-3
+  *  4-by-4
+  *  5-by-5
+==> passed
+
+Test 6: Test toString() with file inputs to ensure that it outputs boards in the correct format
+  *  puzzle04.txt
+  *  puzzle00.txt
+  *  puzzle06.txt
+  *  puzzle09.txt
+  *  puzzle23.txt
+  *  puzzle2x2-unsolvable1.txt
+==> passed
+
+Test 7: Test neighbors() with file inputs to ensure that the correct neighbor board are generated
+  *  puzzle04.txt
+  *  puzzle00.txt
+  *  puzzle06.txt
+  *  puzzle09.txt
+  *  puzzle23.txt
+  *  puzzle2x2-unsolvable1.txt
+==> passed
+
+Test 8: Test neighbors() with random puzzle inputs
+  *  2-by-2
+  *  3-by-3
+  *  4-by-4
+  *  5-by-5
+  *  9-by-9
+  *  10-by-10
+==> passed
+
+Test 9: Test twin() with file inputs to ensure that a correct twin is generated
+  *  puzzle04.txt
+  *  puzzle00.txt
+  *  puzzle06.txt
+  *  puzzle09.txt
+  *  puzzle23.txt
+  *  puzzle2x2-unsolvable1.txt
+==> passed
+
+Test 10: Test twin() with random puzzle states
+  *  2-by-2
+  *  3-by-3
+  *  4-by-4
+  *  5-by-5
+  *  9-by-9
+  *  10-by-10
+==> passed
+
+Test 11: Test isGoal() on file inputs
+  *  puzzle04.txt
+  *  puzzle16.txt
+  *  puzzle06.txt
+  *  puzzle09.txt
+  *  puzzle23.txt
+  *  puzzle2x2-unsolvable1.txt
+==> passed
+
+Test 12: Check whether two Board objects can be created at the same time and still correctly function
+  *   random boards of size 3-by-3 and 3-by-3
+  *   random boards of size 4-by-4 and 4-by-4
+  *   random boards of size 2-by-2 and 2-by-2
+  *   random boards of size 3-by-3 and 4-by-4
+  *   random boards of size 4-by-4 and 3-by-3
+==> passed
+
+Test 13: Check equals()
+  *  reflexive
+  *  symmetric
+  *  checks that individual entries of array are equal
+  *  argument is object of type String
+  *  argument is object of type Object
+  *  argument is null
+  *  argument is Board of different dimension
+==> passed
+
+Test 14: Check that Board is immutable by changing argument 2d array after construction
+ and making sure Board does not change
+==> passed
+
+Test 15: Check that manhattan() and hamming() are independent of neighbors() calls by calling neighbors() 13 times before testing hamming() and manhattan()
+  * (hamming) puzzle00.txt
+  * (hamming) puzzle27.txt
+  * (hamming) puzzle2x2-unsolvable1.txt
+  * (manhattan) puzzle00.txt
+  * (manhattan) puzzle27.txt
+  * (manhattan) puzzle2x2-unsolvable1.txt
+==> passed
+
+
+Total: 15/15 tests passed!
+
+================================================================
+
+******************************************************************************
+*  **** executing with reference Board.java ****
+******************************************************************************
+
+Testing methods in Solver
+*-----------------------------------------------------------
+Running 10 total tests.
+
+Test 0: Run Solver and show output in this report, then compare vs. reference solution
+
+% java Solver puzzle04.txt
+
+original output:
+--reference--                             --student--
+Minimum number of moves = 4               Minimum number of moves = 4
+3                                         3
+ 0  1  3                                   0  1  3
+ 4  2  5                                   4  2  5
+ 7  8  6                                   7  8  6
+
+3                                         3
+ 1  0  3                                   1  0  3
+ 4  2  5                                   4  2  5
+ 7  8  6                                   7  8  6
+
+3                                         3
+ 1  2  3                                   1  2  3
+ 4  0  5                                   4  0  5
+ 7  8  6                                   7  8  6
+
+3                                         3
+ 1  2  3                                   1  2  3
+ 4  5  0                                   4  5  0
+ 7  8  6                                   7  8  6
+
+3                                         3
+ 1  2  3                                   1  2  3
+ 4  5  6                                   4  5  6
+ 7  8  0                                   7  8  0
+
+blank lines removed for comparison:
+--reference--                             --student--
+Minimum number of moves = 4               Minimum number of moves = 4
+3                                         3
+ 0  1  3                                  0  1  3
+ 4  2  5                                  4  2  5
+ 7  8  6                                  7  8  6
+3                                         3
+ 1  0  3                                  1  0  3
+ 4  2  5                                  4  2  5
+ 7  8  6                                  7  8  6
+3                                         3
+ 1  2  3                                  1  2  3
+ 4  0  5                                  4  0  5
+ 7  8  6                                  7  8  6
+3                                         3
+ 1  2  3                                  1  2  3
+ 4  5  0                                  4  5  0
+ 7  8  6                                  7  8  6
+3                                         3
+ 1  2  3                                  1  2  3
+ 4  5  6                                  4  5  6
+ 7  8  0                                  7  8  0
+
+==> passed
+
+Test 1: Call moves() with file inputs to ensure that Solver solves the puzzle in the correct minimum number of moves
+  *  puzzle00.txt
+  *  puzzle01.txt
+  *  puzzle02.txt
+  *  puzzle03.txt
+  *  puzzle04.txt
+  *  puzzle05.txt
+  *  puzzle06.txt
+  *  puzzle07.txt
+  *  puzzle08.txt
+  *  puzzle09.txt
+  *  puzzle10.txt
+  *  puzzle11.txt
+  *  puzzle12.txt
+  *  puzzle13.txt
+==> passed
+
+Test 2: Call solution() with file inputs to ensure that the correct sequence of moves is followed
+  *  puzzle00.txt
+  *  puzzle01.txt
+  *  puzzle02.txt
+  *  puzzle03.txt
+  *  puzzle04.txt
+  *  puzzle05.txt
+  *  puzzle06.txt
+  *  puzzle07.txt
+  *  puzzle08.txt
+  *  puzzle10.txt
+  *  puzzle15.txt
+==> passed
+
+Test 3: Create multiple Solver objects at the same time and still correctly function
+  *  puzzle04.txt and puzzle04.txt
+  *  puzzle00.txt and puzzle04.txt
+  *  puzzle04.txt and puzzle00.txt
+==> passed
+
+Test 4: Call isSolvable() with file inputs
+  *  puzzle01.txt
+  *  puzzle03.txt
+  *  puzzle04.txt
+  *  puzzle17.txt
+  *  puzzle3x3-unsolvable1.txt
+  *  puzzle3x3-unsolvable2.txt
+  *  puzzle4x4-unsolvable.txt
+==> passed
+
+Test 5: Call isSolvable() on random 2-by-2 puzzles
+  *  2-by-2
+==> passed
+
+Test 6: Call moves() on unsolvable puzzles
+  *  puzzle2x2-unsolvable1.txt
+  *  puzzle2x2-unsolvable2.txt
+  *  puzzle3x3-unsolvable1.txt
+  *  puzzle3x3-unsolvable2.txt
+  *  puzzle4x4-unsolvable.txt
+==> passed
+
+Test 7: Call solution() on unsolvable puzzles
+  *  puzzle2x2-unsolvable1.txt
+  *  puzzle2x2-unsolvable2.txt
+  *  puzzle3x3-unsolvable1.txt
+  *  puzzle3x3-unsolvable2.txt
+  *  puzzle4x4-unsolvable.txt
+==> passed
+
+Test 8: Check that Solver is immutable by comparing the results of two calls each to moves(), isSolvable(), and iterator(). The results of these two consecutive calls must match.
+==> passed
+
+Test 9: Call moves() with file inputs
+  *  puzzle14.txt
+  *  puzzle15.txt
+  *  puzzle16.txt
+  *  puzzle17.txt
+  *  puzzle18.txt
+  *  puzzle19.txt
+  *  puzzle20.txt
+  *  puzzle21.txt
+  *  puzzle22.txt
+  *  puzzle23.txt
+  *  puzzle24.txt
+  *  puzzle25.txt
+  *  puzzle26.txt
+  *  puzzle27.txt
+  *  puzzle28.txt
+  *  puzzle29.txt
+  *  puzzle30.txt
+  *  puzzle31.txt
+==> passed
+
+
+Total: 10/10 tests passed!
+
+================================================================
+
+******************************************************************************
+*  memory usage
+******************************************************************************
+
+Computing memory of Board
+*-----------------------------------------------------------
+Running 8 total tests.
+
+Memory usage of an N-by-N board
+
+              N       student (bytes)    reference (bytes)
+----------------------------------------------------------
+=> passed     4           216                  248
+=> passed     8           440                  568
+=> passed    12           728                 1016
+=> passed    16          1080                 1592
+=> passed    20          1496                 2296
+=> passed    36          3800                 6392
+=> passed    72         12728                23096
+=> passed   120         32696                61496
+==> 8/8 tests passed
+
+Total: 8/8 tests passed!
+
+Student   memory = 2.00 N^2 + 32.00 N + 56.00 bytes  (R^2 = 1.000)
+Reference memory = 4.00 N^2 + 32.00 N + 56.00 bytes  (R^2 = 1.000)
+
+================================================================
+
+
+
+******************************************************************************
+*  timing
+******************************************************************************
+
+Timing Solver
+*-----------------------------------------------------------
+Running 18 total tests.
+
+Timing tests use your implementation of Board.java and Solver.java. Maximum allowed time per puzzle is 10 seconds.
+
+                                                              delMin()
+               filename   N    seconds    insert()          + delMax()         max PQ size
+---------------------------------------------------------------------------------------------
+=> passed  puzzle20.txt   3     0.08       1511                 897                 614
+=> passed  puzzle21.txt   3     0.06       2758                1615                1143
+=> passed  puzzle22.txt   3     0.06       3084                1833                1251
+=> passed  puzzle23.txt   3     0.07       5374                3189                2185
+=> passed  puzzle24.txt   3     0.06       6500                3941                2559
+=> passed  puzzle25.txt   3     0.06      11097                6579                4518
+=> passed  puzzle26.txt   3     0.02       5317                3189                2128
+=> passed  puzzle27.txt   3     0.04      10009                6043                3966
+=> passed  puzzle28.txt   3     0.10      24033               14375                9658
+=> passed  puzzle29.txt   3     0.07      24617               14817                9800
+=> passed  puzzle30.txt   3     0.14      41631               25163               16468
+=> passed  puzzle31.txt   3     0.18      53699               32505               21194
+=> passed  puzzle34.txt   4     1.04     254200              121659              132541
+=> passed  puzzle35.txt   4     2.60     523726              254695              269031
+=> passed  puzzle37.txt   4     0.55     157836               76215               81621
+=> passed  puzzle39.txt   4     0.77     152179               74157               78022
+=> passed  puzzle41.txt   5     0.32      76863               32947               43916
+=> passed  puzzle44.txt   5     1.78     308965              138177              170788
+==> 18/18 tests passed
+
+Total: 18/18 tests passed!
+
+================================================================
