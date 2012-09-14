@@ -13,7 +13,8 @@ public class Solver {
             if (previous == null) moves = 0;
             else                  moves = previous.moves + 1;
             priority = board.manhattan() + moves;
-            assert priority >= previous.priority; // Property of A* algorithm.
+            // Property of A* algorithm.
+            assert previous == null || priority >= previous.priority;
         }
 
         public int compareTo(SearchNode that)
