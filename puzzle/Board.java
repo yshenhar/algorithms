@@ -114,7 +114,8 @@ public class Board {
         return true;
     }
 
-    private int[][] swap(int[][] array, int fromRow, int fromCol, int toRow, int toCol) {
+    private int[][] swap(int[][] array, int fromRow, int fromCol, int toRow,
+                         int toCol) {
         int[][] copy = copySquareArray(array);
         copy[toRow][toCol] = blocks[fromRow][fromCol];
         return copy;
