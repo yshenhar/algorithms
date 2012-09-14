@@ -87,12 +87,13 @@ public class Board {
         int col = 0;
         int value = 0;
         int lastValue = blocks[0][0];
+        zerosearch:
         for (row = 0; row < dim; row++) {
             for (col = 0; col < dim; col++) {
                 value = blocks[row][col];
                 // Check col>0 because swap must occur on same row
                 if (value != 0 && lastValue != 0 && col > 0)
-                    break;
+                    break zerosearch;
                 lastValue = value;
             }
         }
@@ -127,10 +128,14 @@ public class Board {
         // Find zero
         int row = 0;
         int col = 0;
-        for (row = 0; row < dim; row++)
-            for (col = 0; col < dim; col++)
-                if (blocks[row][col] == 0)
-                    break;
+        zerosearch:
+        for (row = 0; row < dim; row++) {
+            for (col = 0; col < dim; col++) {
+                if (blocks[row][col] == 0) {
+                    break zerosearch;
+                }
+            }
+        }
         if (row > 0)
             q.enqueue(new Board(swap(blocks, row, col, row - 1, col)));
         if (row < dim)
