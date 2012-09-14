@@ -32,7 +32,7 @@ public class Solver {
     private SearchNode step(MinPQ<SearchNode> pq) {
         SearchNode least = pq.delMin();
         for (Board neighbor: least.board.neighbors()) {
-            if (!neighbor.equals(least.previous.board))
+            if (least.previous == null || !neighbor.equals(least.previous.board))
                 pq.insert(new SearchNode(neighbor, least));
         }
         return least;
