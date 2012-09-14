@@ -70,8 +70,9 @@ public class Board {
         int value = 1;
         for (int row = 0; row < dim; row++)
             for (int col = 0; col < dim; col++)
-                if (blocks[row][col] != value++ && (row != dim || col != dim))
+                if (blocks[row][col] != value++ && (row != dim - 1 || col != dim - 1)) {
                     return false;
+                }
         return true;
     }
 
@@ -138,11 +139,11 @@ public class Board {
         }
         if (row > 0)
             q.enqueue(new Board(swap(blocks, row, col, row - 1, col)));
-        if (row < dim)
+        if (row < dim - 1)
             q.enqueue(new Board(swap(blocks, row, col, row + 1, col)));
         if (col > 0)
             q.enqueue(new Board(swap(blocks, row, col, row, col - 1)));
-        if (col < dim)
+        if (col < dim - 1)
             q.enqueue(new Board(swap(blocks, row, col, row, col + 1)));
         return q;
     }
