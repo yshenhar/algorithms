@@ -68,7 +68,7 @@ public class Solver {
         if (result == null)
             return null;
         Stack<Board> s = new Stack<Board>();
-        for (SearchNode n = result; n.previous != null; n = n.previous)
+        for (SearchNode n = result; n != null; n = n.previous)
             s.push(n.board);
         return s;
     }
