@@ -1,7 +1,7 @@
 public class Solver {
     private SearchNode result;
 
-    private class SearchNode {
+    private class SearchNode implements Comparable<SearchNode> {
         private final Board board;
         private final int moves;
         private final SearchNode previous;
