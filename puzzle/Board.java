@@ -70,9 +70,8 @@ public class Board {
         int value = 1;
         for (int row = 0; row < dim; row++)
             for (int col = 0; col < dim; col++)
-                if (blocks[row][col] != value++ && (row != dim - 1 || col != dim - 1)) {
+                if (blocks[row][col] != value++ && (row != dim - 1 || col != dim - 1))
                     return false;
-                }
         return true;
     }
 
