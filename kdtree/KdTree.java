@@ -169,6 +169,31 @@ public class KdTree {
     }
 
     /**
+     * Find all points in the set that are inside the rectangle.
+     *
+     * @param rect  The rectangle to search inside of
+     * @return      An iterable over the set of points interior to `rect`.
+     */
+    public Iterable<Point2D> range(RectHV rect) {
+        // RectHV guarantees that all the mins are less than the maxes.
+        assert (rect.xmin() >= MIN && rect.xmin() <= MAX
+                && rect.ymin() >= MIN && rect.ymin() <= MAX)
+            && (rect.xmax() >= MIN && rect.xmax() <= MAX
+                && rect.ymax() >= MIN && rect.ymax() <= MAX);
+        Bag<Point2D> inside = new Bag<Point2D>(); // Use a bag for O(1) adds.
+        range(root, rect, inside);
+        return inside;
+    }
+
+    // recursively add nodes' points to bag `inside` if the point is in rect
+    private void range(Node h, RectHV rect, Bag<Point2D> inside) {
+        if (h == null ||  !rect.intersects(h.rect)) return;
+        range(h.lb, rect, inside);
+        if (rect.contains(h.p)) inside.add(h.p);
+        range(h.rt, rect, inside);
+    }
+
+    /**
      * Read input files of points
      *
      * First line gives the number of points; each subsequent line gives two
