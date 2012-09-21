@@ -194,6 +194,19 @@ public class KdTree {
     }
 
     /**
+     * Represent a node as a set {K, R, L} where K is the key and R, L are trees
+     *
+     * @param h     Root node of the subtree being examined
+     * @return      String representation of a node.
+     */
+    private String toString(Node h) {
+        if (h == null) return "";
+        return "{" + h.p.toString() + ", "
+                   + toString(h.lb) + ", "
+                   + toString(h.rt) + "}";
+    }
+
+    /**
      * Read input files of points
      *
      * First line gives the number of points; each subsequent line gives two
