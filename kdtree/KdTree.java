@@ -105,7 +105,16 @@ public class KdTree {
         return false;
     }
 
-    // draw all of the points to standard draw
+    /**
+     * Draw all of the points and dividing lines to standard draw
+     * <p>
+     * Draw the points in bold black, the horizontal lines in thing blue, and
+     * the vertical lines in thin red.
+     * <p>
+     * Recurse through the tree three times, so this method takes >3N steps to
+     * complete. This is faster than recursing through the tree once because
+     * the most expensive operation is changing the pen color.
+     */
     public void draw() {
         if (root == null) return;
         StdDraw.show(0);
