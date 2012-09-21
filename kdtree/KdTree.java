@@ -207,6 +207,29 @@ public class KdTree {
     }
 
     /**
+     * Find a nearest neighbor in the set to p; null if set is empty
+     *
+     * @param p     The query point
+     * @return      The nearest neighbor to `p` in the set
+     */
+    public Point2D nearest(Point2D p) {
+        assert (p.x() >= MIN && p.x() <= MAX && p.y() >= MIN && p.y() <= MAX);
+        if (root == null) return null;
+        return nearest(root, p, root.p);
+    }
+
+    // recursively search nodes for a neighbor to query closer than champ
+    private Point2D nearest(Node h, Point2D query, Point2D champ) {
+        double champDist = champ.distanceSquaredTo(query);
+        if (h == null || champDist < h.rect.distanceSquaredTo(query))
+            return champ;
+        if (champDist > h.p.distanceSquaredTo(query)) champ = h.p;
+        if (h.rt != null && h.rt.rect.contains(query))
+            return nearest(h.lb, query, nearest(h.rt, query, champ));
+        return nearest(h.rt, query, nearest(h.lb, query, champ));
+    }
+
+    /**
      * Read input files of points
      *
      * First line gives the number of points; each subsequent line gives two
