@@ -11,12 +11,14 @@ public class Fast {
         StdDraw.show(0);
     }
 
-    /** Read input files of points
+    /**
+     * Read input files of points
      *
-     *  First line gives the number of points; each subsequent line gives two
-     *  integers, the x and the y coordinates.
+     * First line gives the number of points; each subsequent line gives two
+     * integers, the x and the y coordinates.
      *
-     *  Return an array of Point objects.
+     * @param filename  a file name relative to the current working directory
+     * @return          an array of Point objects.
      */
     private static Point[] readInput(String filename) {
         In in = new In(filename);
