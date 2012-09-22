@@ -59,35 +59,32 @@ public class KdTree {
     // number of points in the set
     public int size() { return N; }
 
-    // add the point p to the set (if it is not already in the set)
+    // add the point p to the set (if it is not already in the set) iteratively
     public void insert(Point2D p) {
-        assert (p.x() >= MIN && p.x() <= MAX && p.y() >= MIN && p.y() <= MAX);
-        root = insert(root, p, null, VERTICAL, false);
-    }
-
-    /**
-     * Recursively search for where to place a new node, then create it.
-     *
-     * @param h      the node to branch from (or to create if `h == null`)
-     * @param p      the point to insert
-     * @param parent the current or about-to-be parent of h
-     * @param horiz  `true` if branching at h is by `y`-coordinate
-     * @param lb     `true` if the last path we took was down the left/bottom
-     *               side, `false` otherwise.
-     * @return       h unless h is null, in which case a new node (i.e., this
-     *               acts like the identity function except at the bottom of
-     *               the tree).
-     */
-    private Node insert(Node h, Point2D p, Node parent, boolean horiz, boolean lb) {
-        if (h == null) {
-            N++;
-            return new Node(p, parent, horiz, lb);
+        if (p.x() < MIN || p.x() > MAX || p.y() < MIN || p.y() > MAX)
+            throw new IllegalArgumentException(p);
+        Node parent = null;
+        Node h = root;
+        boolean horizontal = VERTICAL;
+        boolean lb = false;
+        while (h != null) {
+            if (h.p.equals(p))
+                return;
+            parent = h;
+            if (horizontal && p.y() < h.p.y() || !horizontal && p.x() < h.p.x()) {
+                h = h.lb;
+                lb = true;
+            }
+            else {
+                h = h.rt;
+                lb = false;
+            }
+            horizontal = !horizontal
         }
-        else if (horiz && p.y() < h.p.y() || !horiz && p.x() < h.p.x())
-            h.lb = insert(h.lb, p, h, !horiz, true);
-        else if (!h.p.equals(p))
-            h.rt =  insert(h.rt, p, h, !horiz, false);
-        return h;
+        Node n = new Node(p, parent, horizontal, lb)
+        if (lb) parent.lb = n;
+        else    parent.rt = n;
+        N++;
     }
 
     // does the set contain the point p?
