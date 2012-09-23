@@ -215,15 +215,26 @@ public class KdTree {
     public Point2D nearest(Point2D p) {
         assert (p.x() >= MIN && p.x() <= MAX && p.y() >= MIN && p.y() <= MAX);
         if (root == null) return null;
-        return nearest(root, p, root.p);
+        NearestSearchNode champ = new NearestSearchNode();
+        champ.champ = root.p;
+        champ.champeDist = champ.distanceSquaredTo(query);
+        return nearest(root, p, champ);
+    }
+
+    private static class NearestSearchNode {
+        Point2D champ;
+        double champDist;
     }
 
     // recursively search nodes for a neighbor to query closer than champ
-    private Point2D nearest(Node h, Point2D query, Point2D champ) {
-        double champDist = champ.distanceSquaredTo(query);
+    private Point2D nearest(Node h, Point2D query, NearestSearchNode champ) {
         if (h == null || champDist < h.rect.distanceSquaredTo(query))
             return champ;
-        if (champDist > h.p.distanceSquaredTo(query)) champ = h.p;
+        double hpDist = h.p.distanceSquaredTo(query);
+        if (champDist > hpDist) {
+            champ.champ = h.p;
+            champ.champDist = hpDist;
+        }
         if (h.rt != null && h.rt.rect.contains(query))
             return nearest(h.lb, query, nearest(h.rt, query, champ));
         return nearest(h.rt, query, nearest(h.lb, query, champ));
